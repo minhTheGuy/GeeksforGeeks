@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Stack;
 import java.util.Scanner;
-public class TestInfixToPostFix {
+public class StackProblems {
     static Stack<Character> stack = new Stack<Character>(); // for infix, postfix
     static Stack<Integer> stack1 = new Stack<Integer>(); // for reverse stack's elements
     public static void main(String[] args) {
