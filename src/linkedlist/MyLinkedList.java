@@ -16,6 +16,10 @@ public class MyLinkedList<E> {
         return head;
     }
 
+    public void setHead(Node<E> item) {
+        head = item;
+    }
+
     public void addFirst(E item) {
         head = new Node<E>(item, head);
         ++num_nodes;
