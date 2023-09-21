@@ -29,6 +29,7 @@ public class MyLinkedList<E> {
         Node<E> tmp = head;
         while(tmp.getNext() != null) tmp = tmp.getNext();
         tmp.setNext(new Node<E>(item, tmp.getNext()));
+        ++num_nodes;
     }
 
     public E removeFirst() throws NoSuchElementException {
@@ -37,6 +38,7 @@ public class MyLinkedList<E> {
         }
         Node<E> tmp = head;
         head = head.getNext();
+        --num_nodes;
         return tmp.getElement();
     }
 
@@ -61,7 +63,7 @@ public class MyLinkedList<E> {
         return num_nodes == 0;
     }
 
-    private void swap(Node<E> a, Node<E> b) {
+    public void swap(Node<E> a, Node<E> b) {
         if (a == b) {
             return;
         }
@@ -141,6 +143,10 @@ public class MyLinkedList<E> {
         System.out.print(tmp.getElement());
         tmp = tmp.getNext();
         while (tmp != null) {
+            if (tmp.getNext() == head) {
+                System.out.println(" -> " + tmp.getElement());
+                break;
+            }
             System.out.print(" -> " + tmp.getElement());
             tmp = tmp.getNext();
         }
