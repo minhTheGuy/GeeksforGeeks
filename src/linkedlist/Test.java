@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.util.NoSuchElementException;
+
 public class Test {
     public static void main(String[] args) {
         MyLinkedList<Integer> llist = new MyLinkedList<>();
@@ -16,7 +18,12 @@ public class Test {
         /*llist.sort();
         llist.print();*//*
         System.out.println(llist.countItemAppeared(9));*/
-        System.out.println(llist.countItemAppeared_Recursive(9, llist.getHead()));
+        /*System.out.println(llist.countItemAppeared_Recursive(9, llist.getHead()));
+        convertSinglyToCircular(llist);
+        llist.print();*/
+        llist.print();
+        exchangeFirstAndLastNode(llist);
+        llist.print();
     }
 
     public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) {
@@ -27,5 +34,18 @@ public class Test {
             tmp = tmp.getNext();
         }
         return false;
+    }
+    public static void convertSinglyToCircular(MyLinkedList<Integer> ll) throws NoSuchElementException {
+        Node<Integer> tmp = ll.getHead();
+        if (tmp == null) throw new NoSuchElementException("List is empty");
+        while (tmp.getNext() != null)
+            tmp = tmp.getNext();
+        tmp.setNext(ll.getHead());
+    }
+    public static void exchangeFirstAndLastNode(MyLinkedList<Integer> ll) {
+        Node<Integer> tmp = ll.getHead();
+        while (tmp.getNext() != null)
+            tmp = tmp.getNext();
+        ll.swap(tmp, ll.getHead());
     }
 }
