@@ -18,4 +18,14 @@ public class Test {
         System.out.println(llist.countItemAppeared(9));*/
         System.out.println(llist.countItemAppeared_Recursive(9, llist.getHead()));
     }
+
+    public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) {
+        if (ll.getHead() == null) return true;
+        Node<Integer> tmp = ll.getHead();
+        while (tmp.getNext() != null) {
+            if (tmp.getNext() == ll.getHead()) return true;
+            tmp = tmp.getNext();
+        }
+        return false;
+    }
 }
