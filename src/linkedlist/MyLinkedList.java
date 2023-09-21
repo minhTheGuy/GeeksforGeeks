@@ -130,7 +130,7 @@ public class MyLinkedList<E> {
 
     public int countItemAppeared_Recursive(E item, Node<E> next) {
         if (next == null) return 0;
-        if ((Integer) item == (Integer) next.getElement()) {
+        if (item.equals(next)) {
             return countItemAppeared_Recursive(item, next.getNext()) + 1;
         }
         else return countItemAppeared_Recursive(item, next.getNext());
