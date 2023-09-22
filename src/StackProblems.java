@@ -20,14 +20,12 @@ public class StackProblems {
     }
 
     private static int precedence(char op) throws IllegalArgumentException {
-        switch (op) {
-            case '+' : return 1;
-            case '-' : return 1;
-            case '*' : return 2;
-            case '/' : return 2;
-            case '^' : return 3;
-            default :throw new IllegalArgumentException("Invalid operator");
-        }
+        return switch (op) {
+            case '+', '-' -> 1;
+            case '*', '/' -> 2;
+            case '^' -> 3;
+            default -> throw new IllegalArgumentException("Invalid operator");
+        };
     }
 
     public static String convertToPostfix(String s) {
