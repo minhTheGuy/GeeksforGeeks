@@ -59,4 +59,82 @@ public class Test {
             tmp = tmp.getNext();
         ll.swap(tmp, ll.getHead());
     }
+    public static void reverse(MyLinkedList<Integer> ll) {
+        if (ll.getHead() == null) return;
+        Node<Integer> prev = null;
+        Node<Integer> curr = ll.getHead();
+        Node<Integer> next = null;
+        while (curr != null) {
+            next = curr.getNext();
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+        }
+        ll.setHead(prev);
+    }
+    public static void traverseCircularLList(MyLinkedList<Integer> ll) {
+        if (ll.getHead() == null) return;
+        Node<Integer> tmp = ll.getHead();
+        System.out.print(tmp.getElement());
+        tmp = tmp.getNext();
+        while (tmp != null && tmp != ll.getHead()) {
+            System.out.print(" -> " + tmp.getElement());
+            tmp = tmp.getNext();
+        }
+    }
+    public static boolean detectLoop(MyLinkedList<Integer> ll) {
+        if (ll.getHead() == null) return false;
+        Node<Integer> tmp = ll.getHead();
+        HashSet<Node<Integer>> s = new HashSet<Node<Integer>>();
+        while (tmp != null) {
+            if (s.contains(tmp)) return true;
+            s.add(tmp);
+            tmp = tmp.getNext();
+        }
+        return false;
+    }
+    public static void removeDuplicate(MyLinkedList<Integer> ll) {
+        if (ll.getHead() == null) return;
+        Node<Integer> curr = ll.getHead();
+        while (curr != null) {
+            Node<Integer> tmp = curr;
+            while (tmp != null && curr.getElement().equals(tmp.getElement())) {
+                tmp = tmp.getNext();
+            }
+            curr.setNext(tmp);
+            curr = curr.getNext();
+        }
+    }
+    public static MyLinkedList<Integer> intersectTwoLinkedList(MyLinkedList<Integer> ll1, MyLinkedList<Integer> ll2) {
+        MyLinkedList<Integer> dummy = new MyLinkedList<Integer>();
+        Node<Integer> a = ll1.getHead();
+        Node<Integer> b = ll2.getHead();
+        if (a == null) return ll1;
+        if (b == null) return ll2;
+        while (a != null && b != null) {
+            if (a.getElement().equals(b.getElement())) {
+                dummy.addLast(a.getElement());
+                a = a.getNext();
+                b = b.getNext();
+            }
+            else if (a.getElement() < b.getElement()) {
+                a = a.getNext();
+            }
+            else {
+                b = b.getNext();
+            }
+        }
+        return dummy;
+    }
+    public static Node<Integer> intersectTwoLinkedList_Recursive(Node<Integer> a, Node<Integer> b) {
+        if (a == null || b == null) return null;
+        if (a.getElement() > b.getElement())
+            return intersectTwoLinkedList_Recursive(a, b.getNext());
+        if (a.getElement() < b.getElement())
+            return intersectTwoLinkedList_Recursive(a.getNext(), b);
+
+        Node<Integer> newNode = new Node<Integer>(a.getElement());
+        newNode.setNext(intersectTwoLinkedList_Recursive(a.getNext(), b.getNext()));
+        return newNode;
+    }
 }
