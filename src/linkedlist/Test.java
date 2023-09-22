@@ -42,6 +42,17 @@ public class Test {
             tmp = tmp.getNext();
         tmp.setNext(ll.getHead());
     }
+    public static void convertCircularToSingly(MyLinkedList<Integer> ll) throws NoSuchElementException {
+        if (ll.getHead() == null) return;
+        Node<Integer> curr = ll.getHead();
+        while (curr != null) {
+            if (curr.getNext() == ll.getHead()) {
+                curr.setNext(null);
+                break;
+            }
+            curr = curr.getNext();
+        }
+    }
     public static void exchangeFirstAndLastNode(MyLinkedList<Integer> ll) {
         Node<Integer> tmp = ll.getHead();
         while (tmp.getNext() != null)
