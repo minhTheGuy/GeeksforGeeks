@@ -1,29 +1,63 @@
 package linkedlist;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 public class Test {
     public static void main(String[] args) {
         MyLinkedList<Integer> llist = new MyLinkedList<>();
-        llist.addFirst(3);
-        llist.addFirst(0);
-        llist.addLast(7);
-        llist.addLast(5);
-        llist.addFirst(9);
+//        llist.addFirst(3);
+//        llist.addFirst(0);
+//        llist.addLast(7);
+//        llist.addLast(5);
+//        llist.addFirst(9);
+//        llist.addFirst(1);
+//        llist.addLast(4);
+//        llist.addLast(2);
+//        llist.addFirst(8);
+//        llist.addLast(9);
         llist.addFirst(1);
-        llist.addLast(4);
-        llist.addLast(2);
-        llist.addFirst(8);
-        llist.addLast(9);
+        llist.addFirst(1);
+        llist.addFirst(3);
+        llist.addFirst(3);
+        llist.addFirst(4);
         /*llist.sort();
         llist.print();*//*
         System.out.println(llist.countItemAppeared(9));*/
         /*System.out.println(llist.countItemAppeared_Recursive(9, llist.getHead()));
         convertSinglyToCircular(llist);
         llist.print();*/
-        llist.print();
-        exchangeFirstAndLastNode(llist);
-        llist.print();
+//        llist.print();
+//        System.out.println();
+//        exchangeFirstAndLastNode(llist);
+//        System.out.println();
+//        llist.print();
+//        System.out.println();
+//        reverse(llist);
+//        llist.print();
+//        System.out.println();
+//        traverseCircularLList(llist);
+//        removeDuplicate(llist);
+//        System.out.println();
+//        llist.print();
+        MyLinkedList<Integer> llist1 = new MyLinkedList<Integer>();
+        llist1.addLast(8);
+        llist1.addLast(9);
+        llist1.addLast(10);
+        llist1.addLast(11);
+        llist1.addLast(12);
+        MyLinkedList<Integer> llist2 = new MyLinkedList<Integer>();
+        llist2.addLast(5);
+        llist2.addLast(6);
+        llist2.addLast(7);
+        llist2.addLast(8);
+        llist2.addLast(9);
+//        MyLinkedList<Integer> llist3 = intersectTwoLinkedList(llist1, llist2);
+//        llist3.print();
+        Node<Integer> head4 = intersectTwoLinkedList_Recursive(llist1.getHead(), llist2.getHead());
+        MyLinkedList<Integer> llist4 = new MyLinkedList<Integer>();
+        llist4.setHead(head4);
+        llist4.print();
     }
 
     public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) {
