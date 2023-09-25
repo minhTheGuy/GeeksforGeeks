@@ -1,6 +1,6 @@
 package trees;
 
-public class Node {
+public class Node { // this is the node which contains 2 other node or leaf
 
     int element;
     private Node leftNode;
@@ -10,7 +10,7 @@ public class Node {
         leftNode = null;
         rightNode = null;
     }
-
+    // Getter and Setter
     public int getElement() {
         return this.element;
     }
