@@ -60,51 +60,51 @@ public class Test {
         llist4.print();
     }
 
-    public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) {
-        if (ll.getHead() == null) return true;
+    public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) throws NoSuchElementException{
+        if (ll.getHead() == null) throw new NoSuchElementException("There's no way the empty list is circular");
         Node<Integer> tmp = ll.getHead();
         while (tmp.getNext() != null) {
-            if (tmp.getNext() == ll.getHead()) return true;
-            tmp = tmp.getNext();
+            if (tmp.getNext() == ll.getHead()) return true; // If the current node's next node is head, return true;
+            tmp = tmp.getNext(); // Forward to next node
         }
         return false;
     }
     public static void convertSinglyToCircular(MyLinkedList<Integer> ll) throws NoSuchElementException {
         Node<Integer> tmp = ll.getHead();
-        if (tmp == null) throw new NoSuchElementException("List is empty");
+        if (tmp == null) throw new NoSuchElementException("List is empty"); // Can't convert empty list
         while (tmp.getNext() != null)
-            tmp = tmp.getNext();
-        tmp.setNext(ll.getHead());
+            tmp = tmp.getNext(); // Move forward the tmp node to the last node
+        tmp.setNext(ll.getHead()); // Connect last node to head
     }
     public static void convertCircularToSingly(MyLinkedList<Integer> ll) throws NoSuchElementException {
         if (ll.getHead() == null) return;
         Node<Integer> curr = ll.getHead();
         while (curr != null) {
             if (curr.getNext() == ll.getHead()) {
-                curr.setNext(null);
+                curr.setNext(null); // Remove the connection from last Node to head
                 break;
             }
-            curr = curr.getNext();
+            curr = curr.getNext(); // Move forward to reach the last node;
         }
     }
     public static void exchangeFirstAndLastNode(MyLinkedList<Integer> ll) {
         Node<Integer> tmp = ll.getHead();
         while (tmp.getNext() != null)
-            tmp = tmp.getNext();
-        ll.swap(tmp, ll.getHead());
+            tmp = tmp.getNext(); // Move forward to reach the last node
+        ll.swap(tmp, ll.getHead()); // Swap the first and last by using swap method (private user method)
     }
     public static void reverse(MyLinkedList<Integer> ll) {
         if (ll.getHead() == null) return;
-        Node<Integer> prev = null;
+        Node<Integer> prev = null; // Prev node which follows curr node
         Node<Integer> curr = ll.getHead();
-        Node<Integer> next = null;
+        Node<Integer> next = null; // The next node which helps the curr node to move to next node's position
         while (curr != null) {
             next = curr.getNext();
             curr.setNext(prev);
             prev = curr;
             curr = next;
         }
-        ll.setHead(prev);
+        ll.setHead(prev); // Set the head from the original head to new head (whc
     }
     public static void traverseCircularLList(MyLinkedList<Integer> ll) {
         if (ll.getHead() == null) return;
@@ -119,10 +119,10 @@ public class Test {
     public static boolean detectLoop(MyLinkedList<Integer> ll) {
         if (ll.getHead() == null) return false;
         Node<Integer> tmp = ll.getHead();
-        HashSet<Node<Integer>> s = new HashSet<Node<Integer>>();
+        HashSet<Node<Integer>> s = new HashSet<Node<Integer>>(); // We use HashSet to store the visited node
         while (tmp != null) {
-            if (s.contains(tmp)) return true;
-            s.add(tmp);
+            if (s.contains(tmp)) return true; // If there's Node tmp in 's', return true
+            s.add(tmp); // Else add node to set (which means the tmp will be visited
             tmp = tmp.getNext();
         }
         return false;
