@@ -148,13 +148,16 @@ public class Test {
         while (a != null && b != null) {
             if (a.getElement().equals(b.getElement())) {
                 dummy.addLast(a.getElement());
+                dummy.addLast(b.getElement());
                 a = a.getNext();
                 b = b.getNext();
             }
             else if (a.getElement() < b.getElement()) {
+                dummy.addLast(a.getElement());
                 a = a.getNext();
             }
             else {
+                dummy.addLast(b.getElement());
                 b = b.getNext();
             }
         }
