@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 public class Test {
+    static Node<Integer> head1, head2;
     public static void main(String[] args) {
         MyLinkedList<Integer> llist = new MyLinkedList<>();
 //        llist.addFirst(3);
@@ -16,11 +17,9 @@ public class Test {
 //        llist.addLast(2);
 //        llist.addFirst(8);
 //        llist.addLast(9);
-        llist.addFirst(1);
-        llist.addFirst(1);
-        llist.addFirst(3);
-        llist.addFirst(3);
-        llist.addFirst(4);
+        llist.addLast(1);
+        llist.addLast(3);
+        llist.addLast(4);
         /*llist.sort();
         llist.print();*//*
         System.out.println(llist.countItemAppeared(9));*/
@@ -41,24 +40,31 @@ public class Test {
 //        System.out.println();
 //        llist.print();
         MyLinkedList<Integer> llist1 = new MyLinkedList<Integer>();
-        llist1.addLast(8);
-        llist1.addLast(9);
-        llist1.addLast(10);
-        llist1.addLast(11);
-        llist1.addLast(12);
-        MyLinkedList<Integer> llist2 = new MyLinkedList<Integer>();
-        llist2.addLast(5);
-        llist2.addLast(6);
-        llist2.addLast(7);
-        llist2.addLast(8);
-        llist2.addLast(9);
-//        MyLinkedList<Integer> llist3 = intersectTwoLinkedList(llist1, llist2);
-//        llist3.print();
-        Node<Integer> head4 = intersectTwoLinkedList_Recursive(llist1.getHead(), llist2.getHead());
-        MyLinkedList<Integer> llist4 = new MyLinkedList<Integer>();
-        llist4.setHead(head4);
-        llist4.print();
+        llist1.addLast(1);
+        llist1.addLast(2);
+        llist1.addLast(4);
+        MyLinkedList<Integer> intersect = intersectTwoLinkedList(llist, llist1);
+        intersect.print();
+//        MyLinkedList<Integer> llist2 = new MyLinkedList<Integer>();
+//        llist2.addLast(5);
+//        llist2.addLast(6);
+//        llist2.addLast(7);
+//        llist2.addLast(8);
+//        llist2.addLast(9);
+////        MyLinkedList<Integer> llist3 = intersectTwoLinkedList(llist1, llist2);
+////        llist3.print();
+//        Node<Integer> head4 = intersectTwoLinkedList_Recursive(llist1.getHead(), llist2.getHead());
+//        MyLinkedList<Integer> llist4 = new MyLinkedList<Integer>();
+//        llist4.setHead(head4);
+//        llist4.print();
+        System.out.println();
+        convertSinglyToCircular(llist1);
+        splitToHalfCircularLList(llist1.getHead());
+        llist1.print();
+        traverseCircularLList(head1);
+        traverseCircularLList(head2);
     }
+
 
     public static boolean isCircularLinkedList(MyLinkedList<Integer> ll) throws NoSuchElementException{
         if (ll.getHead() == null) throw new NoSuchElementException("There's no way the empty list is circular");
@@ -112,6 +118,16 @@ public class Test {
         System.out.print(tmp.getElement());
         tmp = tmp.getNext();
         while (tmp != null && tmp != ll.getHead()) {
+            System.out.print(" -> " + tmp.getElement());
+            tmp = tmp.getNext();
+        }
+    }
+    public static void traverseCircularLList(Node<Integer> node) {
+        if (node == null) return;
+        Node<Integer> tmp = node;
+        System.out.print(tmp.getElement());
+        tmp = tmp.getNext();
+        while (tmp != null && tmp != node) {
             System.out.print(" -> " + tmp.getElement());
             tmp = tmp.getNext();
         }
@@ -173,5 +189,24 @@ public class Test {
         Node<Integer> newNode = new Node<Integer>(a.getElement());
         newNode.setNext(intersectTwoLinkedList_Recursive(a.getNext(), b.getNext()));
         return newNode;
+    }
+
+    public static void splitToHalfCircularLList(Node<Integer> head) throws NoSuchElementException{
+        if (head == null) throw new NoSuchElementException();
+        Node<Integer> fast_node;
+        Node<Integer> slow_node;
+        fast_node = slow_node = head;
+        while (slow_node.getNext() != head && fast_node.getNext().getNext() != head) {
+            fast_node = fast_node.getNext().getNext();
+            slow_node = slow_node.getNext();
+        }
+        if (fast_node.getNext().getNext() == head) {
+            fast_node = fast_node.getNext().getNext();
+        }
+        head1 = fast_node;
+        if (head.getNext() != head)
+            head2 = slow_node;
+        fast_node.setNext(slow_node.getNext());
+        slow_node.setNext(head);
     }
 }
